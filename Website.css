@@ -1,7 +1,9 @@
 body {
-   background-color: rgb(110, 124, 129);
+   background-color: rgb(143, 172, 182);
    font-family: 'Arial', sans-serif;
    text-align: center;
+   min-width: 500px;
+   min-height: 500px;
 }
 
 h1 {
@@ -10,15 +12,17 @@ h1 {
 }
 
 p {
-   font-size: 18px;
+   font-size: 21px;
    line-height: 1.6;
    text-align: center;
+   font-family: Georgia;
 }
 
 button {
-    background-color: rgb(69, 65, 65);
-    border: 2px;
-    color: rgb(4, 55, 92);
+    background-color: rgb(68, 74, 81);
+    border-color: azure;
+    border: 10px;
+    color: rgb(240, 154, 154);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
