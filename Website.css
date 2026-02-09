@@ -3,7 +3,7 @@ body {
    font-family: 'Arial', sans-serif;
    text-align: center;
    min-width: 500px;
-   min-height: 500px;
+   min-height: 1500px;
 }
 
 h1 {
@@ -32,10 +32,19 @@ button {
     border-radius: 10px;
 }
 
-img {
-    display: block;
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.image-container img {
+   display: block;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
     align-self: center;
+    max-width: 100%;
+    height: auto;
 }
