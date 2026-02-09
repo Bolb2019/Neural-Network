@@ -2,6 +2,8 @@ body {
    background-color: rgb(143, 172, 182);
    font-family: 'Arial', sans-serif;
    text-align: center;
+   -webkit-text-stroke: 2px;
+    -webkit-text-stroke-color: rgb(29, 55, 69);
    min-width: 500px;
    min-height: 1500px;
 }
@@ -20,11 +22,13 @@ p {
 
 button {
     background-color: rgb(68, 74, 81);
-    border-color: azure;
-    border: 10px;
+    outline-color: azure;
+    outline: 5px;
     color: rgb(240, 154, 154);
     padding: 10px 20px;
     text-align: center;
+    -webkit-text-stroke: 2px;
+    -webkit-text-stroke-color: azure;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
