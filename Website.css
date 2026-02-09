@@ -1,29 +1,24 @@
 body {
-   background-color: lightblue;
+   background-color: rgb(75, 78, 79);
    font-family: 'Arial', sans-serif;
    text-align: center;
 }
 
 h1 {
-   color: white;
+   color: rgb(240, 154, 154);
    text-align: center;
 }
 
 p {
    font-size: 18px;
    line-height: 1.6;
-   text-align: justify;
-}
-
-ul li {
-   list-style-type: square;
-   margin-left: 20px;
+   text-align: center;
 }
 
 button {
-    background-color: white;
-    border: none;
-    color: black;
+    background-color: rgb(69, 65, 65);
+    border: 2px;
+    color: rgb(4, 55, 92);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -32,4 +27,5 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     font-size: 25px;
+    border-radius: 10px;
 }
