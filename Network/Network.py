@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 class NeuralNetwork:
 
@@ -11,7 +12,8 @@ class NeuralNetwork:
         return 1 / (1 + np.exp(-x))
 
     def _sigmoid_deriv(self, x):
-        return self._sigmoid(x) * (1 - self._sigmoid(x))
+        s = self._sigmoid(x)
+        return s * (1 - s)
 
     def predict(self, input_vector):
         layer_1 = np.dot(input_vector, self.weights) + self.bias
@@ -21,62 +23,71 @@ class NeuralNetwork:
 
     def _compute_gradients(self, input_vector, target):
         layer_1 = np.dot(input_vector, self.weights) + self.bias
-        layer_2 = self._sigmoid(layer_1)
-        prediction = layer_2
+        prediction = self._sigmoid(layer_1)
 
         derror_dprediction = 2 * (prediction - target)
         dprediction_dlayer1 = self._sigmoid_deriv(layer_1)
-        dlayer1_dbias = 1
-        dlayer1_dweights = (0 * self.weights) + (1 * input_vector)
 
-        derror_dbias = (
-            derror_dprediction * dprediction_dlayer1 * dlayer1_dbias
-        )
-        derror_dweights = (
-            derror_dprediction * dprediction_dlayer1 * dlayer1_dweights
-        )
+        derror_dbias = derror_dprediction * dprediction_dlayer1
+        derror_dweights = derror_dprediction * dprediction_dlayer1 * input_vector
 
         return derror_dbias, derror_dweights
 
     def _update_parameters(self, derror_dbias, derror_dweights):
-        self.bias = self.bias - (derror_dbias * self.learning_rate)
-        self.weights = self.weights - (
-            derror_dweights * self.learning_rate
-        )
+        self.bias -= derror_dbias * self.learning_rate
+        self.weights -= derror_dweights * self.learning_rate
 
     def train(self, input_vectors, targets, iterations):
         cumulative_errors = []
-        for current_iteration in range(iterations):
-            # Pick a data instance at random
-            random_data_index = np.random.randint(len(input_vectors))
 
+        # Store points for best-fit line
+        fit_x = []
+        fit_y = []
+
+        for current_iteration in range(iterations):
+            random_data_index = np.random.randint(len(input_vectors))
             input_vector = input_vectors[random_data_index]
             target = targets[random_data_index]
 
-            # Compute the gradients and update the weights
             derror_dbias, derror_dweights = self._compute_gradients(
                 input_vector, target
             )
-
             self._update_parameters(derror_dbias, derror_dweights)
 
-            # Measure the cumulative error for all the instances
             if current_iteration % 100 == 0:
                 cumulative_error = 0
-                # Loop through all the instances to measure the error
-                for data_instance_index in range(len(input_vectors)):
-                    data_point = input_vectors[data_instance_index]
-                    target = targets[data_instance_index]
+
+                for i in range(len(input_vectors)):
+                    data_point = input_vectors[i]
+                    target = targets[i]
 
                     prediction = self.predict(data_point)
                     error = np.square(prediction - target)
+                    cumulative_error += error
 
-                    cumulative_error = cumulative_error + error
+                    x = current_iteration / 100
+                    fit_x.append(x)
+                    fit_y.append(prediction)
+                    plt.plot(x, prediction, 'x')
+
                 cumulative_errors.append(cumulative_error)
+
+        # Plot line of best fit
+        fit_x = np.array(fit_x)
+        fit_y = np.array(fit_y)
+
+        m, b = np.polyfit(fit_x, fit_y, 1)
+        best_fit_y = m * fit_x + b
+
+        plt.plot(fit_x, best_fit_y)
+        plt.xlabel("Iterations / 100")
+        plt.ylabel("Prediction")
+        plt.title("Line of Best Fit for Predictions")
+        plt.savefig("Network/prediction_best_fit.png")
+        plt.clf()
 
         return cumulative_errors
 
-import matplotlib.pyplot as plt
 
 def neuralNetwork():
     input_vectors = np.array(
@@ -94,10 +105,16 @@ def neuralNetwork():
 
     targets = np.array([0, 1, 0, 1, 0, 1, 1, 0])
     learning_rate = 0.1
+
     neural_network = NeuralNetwork(learning_rate)
     training_error = neural_network.train(input_vectors, targets, 10000)
 
     plt.plot(training_error)
-    plt.xlabel("Iterations")
+    plt.xlabel("Iterations / 100")
     plt.ylabel("Error for all training instances")
-    plt.savefig("cumulative_error.png")
+    plt.title("Cumulative Error During Training")
+    plt.savefig("Network/cumulative_error.png")
+    plt.clf()
+
+
+neuralNetwork()
