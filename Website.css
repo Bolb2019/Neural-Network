@@ -6,22 +6,24 @@ body {
    background-color: rgb(143, 172, 182);
    font-family: 'Arial', sans-serif;
    text-align: center;
+   -webkit-text-stroke: 1px;
+   -webkit-text-stroke-color: rgb(29, 55, 69);
    min-width: 500px;
    min-height: 500px;
 }
 
 h1 {
    color: rgb(240, 154, 154);
-   outline-color: rgb(36, 56, 84);
-   outline: 2px;
+   -webkit-text-stroke: 1px;
+   -webkit-text-stroke-color: azure;
    text-align: center;
 }
     
 p {
    font-size: 21px;
    line-height: 1.6;
-   outline-color: azure;
-   outline: 1px;
+   -webkit-text-stroke: 0.5px;
+   -webkit-text-stroke-color: azure;
    text-align: center;
    font-family: Georgia;
 }
@@ -33,6 +35,8 @@ button {
     color: rgb(240, 154, 154);
     padding: 10px 20px;
     text-align: center;
+    -webkit-text-stroke: 1px;
+    -webkit-text-stroke-color: azure;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;

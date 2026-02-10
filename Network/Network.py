@@ -81,7 +81,7 @@ class NeuralNetwork:
 
         plt.plot(fit_x, best_fit_y)
         plt.xlabel("Iterations / 100")
-        plt.ylabel("Prediction")
+        plt.ylabel("Prediction (lower is better)")
         plt.title("Line of Best Fit for Predictions")
         plt.savefig("Network/prediction_best_fit.png")
         plt.clf()
