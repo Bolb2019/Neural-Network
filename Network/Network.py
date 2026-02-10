@@ -14,11 +14,15 @@ class NeuralNetwork:
     def _sigmoid_deriv(self, x):
         s = self._sigmoid(x)
         return s * (1 - s)
+    
+    def _approx(self, x):
+        pass
+        #layer 2
 
     def predict(self, input_vector):
         layer_1 = np.dot(input_vector, self.weights) + self.bias
-        layer_2 = self._sigmoid(layer_1)
-        prediction = layer_2
+        layer_3 = self._sigmoid(layer_1)
+        prediction = layer_3
         return prediction
 
     def _compute_gradients(self, input_vector, target):
@@ -39,6 +43,7 @@ class NeuralNetwork:
 
     def train(self, input_vectors, targets, iterations):
         cumulative_errors = []
+        cumulative_predictions = []
 
         # Store points for best-fit line
         fit_x = []
@@ -56,6 +61,7 @@ class NeuralNetwork:
 
             if current_iteration % 100 == 0:
                 cumulative_error = 0
+                cumulative_prediction = 0
 
                 for i in range(len(input_vectors)):
                     data_point = input_vectors[i]
@@ -64,12 +70,14 @@ class NeuralNetwork:
                     prediction = self.predict(data_point)
                     error = np.square(prediction - target)
                     cumulative_error += error
+                    cumulative_prediction += prediction
 
                     x = current_iteration / 100
                     fit_x.append(x)
                     fit_y.append(prediction)
                     plt.plot(x, prediction, 'x')
 
+                cumulative_predictions.append(cumulative_prediction)
                 cumulative_errors.append(cumulative_error)
 
         # Plot line of best fit
@@ -79,9 +87,10 @@ class NeuralNetwork:
         m, b = np.polyfit(fit_x, fit_y, 1)
         best_fit_y = m * fit_x + b
 
-        plt.plot(fit_x, best_fit_y)
+        #plt.plot(fit_x, best_fit_y)
+        #plt.plot(cumulative_predictions)
         plt.xlabel("Iterations / 100")
-        plt.ylabel("Prediction (lower is better)")
+        plt.ylabel("Prediction")
         plt.title("Line of Best Fit for Predictions")
         plt.savefig("Network/prediction_best_fit.png")
         plt.clf()
@@ -104,10 +113,9 @@ def neuralNetwork():
     )
 
     targets = np.array([0, 1, 0, 1, 0, 1, 1, 0])
-    learning_rate = 0.1
-
+    learning_rate = 0.001
     neural_network = NeuralNetwork(learning_rate)
-    training_error = neural_network.train(input_vectors, targets, 10000)
+    training_error = neural_network.train(input_vectors, targets, 100000)
 
     plt.plot(training_error)
     plt.xlabel("Iterations / 100")
