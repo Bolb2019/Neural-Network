@@ -75,7 +75,7 @@ class NeuralNetwork:
                     x = current_iteration / 100
                     fit_x.append(x)
                     fit_y.append(prediction)
-                    plt.plot(x, prediction, 'x')
+                    plt.plot(x, prediction, 'x', color='blue' if (target == 1 and prediction >= 0.5) or (target == 0 and prediction < 0.5) else 'red')
 
                 cumulative_predictions.append(cumulative_prediction)
                 cumulative_errors.append(cumulative_error)
@@ -87,12 +87,19 @@ class NeuralNetwork:
         m, b = np.polyfit(fit_x, fit_y, 1)
         best_fit_y = m * fit_x + b
 
-        #plt.plot(fit_x, best_fit_y)
-        #plt.plot(cumulative_predictions)
+        plt.plot(fit_x, best_fit_y)
+        plt.xlabel("Iterations / 100")
+        plt.ylabel("Prediction Accuracy")
+        plt.legend(["correct predictions (blue)", "incorrect predictions (red)"])
+        plt.plot(0, 0.5, "o", color='green', label='Decision Boundary')
+        plt.savefig("Network/prediction_best_fit.png")
+        plt.clf()
+
+        plt.plot(cumulative_predictions)
         plt.xlabel("Iterations / 100")
         plt.ylabel("Prediction")
-        plt.title("Line of Best Fit for Predictions")
-        plt.savefig("Network/prediction_best_fit.png")
+        plt.title("Value predicited by the model")
+        plt.savefig("Network/predicted.png")
         plt.clf()
 
         return cumulative_errors
