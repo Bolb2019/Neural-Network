@@ -42,6 +42,9 @@ class NeuralNetwork:
         self.weights -= derror_dweights * self.learning_rate
 
     def train(self, input_vectors, targets, iterations):
+        correct = 0
+        incorrect = 0
+
         cumulative_errors = []
         cumulative_predictions = []
 
@@ -75,6 +78,11 @@ class NeuralNetwork:
                     x = current_iteration / 100
                     fit_x.append(x)
                     fit_y.append(prediction)
+                    if (target == 1 and prediction >= 0.5) or (target == 0 and prediction < 0.5):
+                        correct += 1
+                    else:
+                        incorrect += 1
+
                     plt.plot(x, prediction, 'x', color='blue' if (target == 1 and prediction >= 0.5) or (target == 0 and prediction < 0.5) else 'red')
 
                 cumulative_predictions.append(cumulative_prediction)
@@ -90,7 +98,7 @@ class NeuralNetwork:
         plt.plot(fit_x, best_fit_y)
         plt.xlabel("Iterations / 100")
         plt.ylabel("Prediction Accuracy")
-        plt.legend(["correct predictions (blue)", "incorrect predictions (red)"])
+        plt.legend(["correct predictions (blue): " + str(correct), "incorrect predictions (red): " + str(incorrect)])
         plt.plot(0, 0.5, "o", color='green', label='Decision Boundary')
         plt.savefig("Network/prediction_best_fit.png")
         plt.clf()
