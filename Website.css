@@ -67,3 +67,47 @@ img {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
+
+.controls-container {
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    background-color: rgba(68, 74, 81, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(240, 154, 154, 0.3);
+}
+
+.control-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.control-group label {
+    font-size: 16px;
+    color: rgb(240, 154, 154);
+    -webkit-text-stroke: 0.5px;
+    -webkit-text-stroke-color: rgb(53, 61, 61);
+    width: 130px;
+    text-align: right;
+}
+
+.control-group input {
+    width: 150px;
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: rgb(200, 200, 200);
+    color: rgb(29, 55, 69);
+    border: 2px solid rgba(240, 154, 154, 0.5);
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.control-group input:focus {
+    outline: none;
+    border-color: rgb(240, 154, 154);
+    background-color: rgb(220, 220, 220);
+}
