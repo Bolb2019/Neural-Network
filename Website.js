@@ -171,6 +171,16 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
                     pointRadius: 0
                 },
                 {
+                    label: 'Best Fit Line',
+                    data: fitX.map((x, i) => ({x: x, y: bestFitLine[i]})),
+                    borderColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'transparent',
+                    showLine: true,
+                    borderWidth: 2,
+                    fill: false,
+                    tension: 0
+                },
+                {
                     label: `Correct Predictions (${correct})`,
                     data: pointsCorrect.map(p => ({x: p.x, y: p.y})),
                     borderColor: 'rgb(54, 162, 235)',
@@ -183,16 +193,6 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
                     borderColor: 'rgb(255, 99, 132)',
                     backgroundColor: 'rgba(255, 99, 132, 0.8)',
                     showLine: false
-                },
-                {
-                    label: 'Best Fit Line',
-                    data: fitX.map((x, i) => ({x: x, y: bestFitLine[i]})),
-                    borderColor: 'rgb(75, 192, 192)',
-                    backgroundColor: 'transparent',
-                    showLine: true,
-                    borderWidth: 2,
-                    fill: false,
-                    tension: 0
                 }
             ]
         },
