@@ -124,8 +124,16 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
         sumX2 += fitX[i] * fitX[i];
     }
     const n = fitX.length;
-    const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
-    const intercept = (sumY - slope * sumX) / n;
+    
+    // Handle edge case where denominator could be zero
+    let slope = 0;
+    let intercept = sumY / n; // Use mean as fallback
+    const denominator = (n * sumX2 - sumX * sumX);
+    
+    if (Math.abs(denominator) > 0.0001) { // Avoid division by zero
+        slope = (n * sumXY - sumX * sumY) / denominator;
+        intercept = (sumY - slope * sumX) / n;
+    }
     
     const bestFitLine = fitX.map(x => slope * x + intercept);
     

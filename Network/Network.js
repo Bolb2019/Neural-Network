@@ -54,6 +54,8 @@ class NeuralNetwork {
         const fitY = [];
         const pointsCorrect = [];
         const pointsIncorrect = [];
+        let totalCorrect = 0;
+        let totalIncorrect = 0;
 
         for (let currentIteration = 0; currentIteration < iterations; currentIteration++) {
             const randomDataIndex = Math.floor(Math.random() * inputVectors.length);
@@ -66,9 +68,6 @@ class NeuralNetwork {
             if (currentIteration % 100 === 0) {
                 let cumulativeError = 0;
                 let cumulativePrediction = 0;
-
-                correct = 0;
-                incorrect = 0;
 
                 for (let i = 0; i < inputVectors.length; i++) {
                     const dataPoint = inputVectors[i];
@@ -84,10 +83,10 @@ class NeuralNetwork {
 
                     const isCorrect = (targetVal === 1 && prediction >= 0.5) || (targetVal === 0 && prediction < 0.5);
                     if (isCorrect) {
-                        correct++;
+                        totalCorrect++;
                         pointsCorrect.push({ x, y: prediction });
                     } else {
-                        incorrect++;
+                        totalIncorrect++;
                         pointsIncorrect.push({ x, y: prediction });
                     }
                 }
@@ -104,8 +103,8 @@ class NeuralNetwork {
             fitY,
             pointsCorrect,
             pointsIncorrect,
-            correct,
-            incorrect
+            correct: totalCorrect,
+            incorrect: totalIncorrect
         };
     }
 }
