@@ -74,9 +74,6 @@ img {
     padding: 20px;
     width: 80%;
     max-width: 500px;
-    background-color: rgba(68, 74, 81, 0.3);
-    border-radius: 8px;
-    border: 1px solid rgba(240, 154, 154, 0.3);
 }
 
 .control-group {

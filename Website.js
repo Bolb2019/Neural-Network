@@ -3,13 +3,13 @@ function runNetwork() {
     const learningRate = parseFloat(document.getElementById('learningRate').value);
     const iterations = parseInt(document.getElementById('iterations').value);
     
-    // Validate inputs
-    if (isNaN(learningRate) || learningRate <= 0) {
-        alert('Please enter a valid learning rate greater than 0');
+    // Validate inputs with strict bounds
+    if (isNaN(learningRate) || learningRate < 0.00001 || learningRate > 1) {
+        alert('Learning rate must be between 0.00001 and 1');
         return;
     }
-    if (isNaN(iterations) || iterations <= 0) {
-        alert('Please enter a valid number of iterations greater than 0');
+    if (isNaN(iterations) || iterations < 10 || iterations > 10000000) {
+        alert('Iterations must be between 10 and 10,000,000');
         return;
     }
     
@@ -27,6 +27,30 @@ function runNetwork() {
         document.getElementById('status').innerText = 'Training complete!';
     }, 100);
 }
+
+// Setup input validation to clamp values on blur
+document.addEventListener('DOMContentLoaded', function() {
+    const learningRateInput = document.getElementById('learningRate');
+    const iterationsInput = document.getElementById('iterations');
+    
+    learningRateInput.addEventListener('blur', function() {
+        let value = parseFloat(this.value);
+        if (isNaN(value) || value < 0.00001) {
+            this.value = 0.00001;
+        } else if (value > 1) {
+            this.value = 1;
+        }
+    });
+    
+    iterationsInput.addEventListener('blur', function() {
+        let value = parseInt(this.value);
+        if (isNaN(value) || value < 10) {
+            this.value = 10;
+        } else if (value > 10000000) {
+            this.value = 10000000;
+        }
+    });
+});
 
 function plotCumulativeError(errors) {
     const ctx = document.getElementById('cumulativeErrorChart').getContext('2d');
