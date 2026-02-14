@@ -77,7 +77,7 @@ class NeuralNetwork {
                     cumulativeError += error;
                     cumulativePrediction += prediction;
 
-                    const x = currentIteration / 100;
+                    const x = currentIteration;
                     fitX.push(x);
                     fitY.push(prediction);
 
