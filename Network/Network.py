@@ -42,6 +42,9 @@ class NeuralNetwork:
         self.weights -= derror_dweights * self.learning_rate
 
     def train(self, input_vectors, targets, iterations):
+        plt.plot(0, 0, color='blue')
+        plt.plot(0, 0, color='red')
+
         correct = 0
         incorrect = 0
 
@@ -98,7 +101,7 @@ class NeuralNetwork:
         plt.plot(fit_x, best_fit_y)
         plt.xlabel("Iterations / 100")
         plt.ylabel("Prediction Accuracy")
-        plt.legend(["correct predictions (blue): " + str(correct), "incorrect predictions (red): " + str(incorrect)])
+        plt.legend(["correct predictions: " + str(correct), "incorrect predictions: " + str(incorrect)])
         plt.plot(0, 0.5, "o", color='green', label='Decision Boundary')
         plt.savefig("Network/prediction_best_fit.png")
         plt.clf()
