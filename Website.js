@@ -19,7 +19,7 @@ function plotCumulativeError(errors) {
     const ctx = document.getElementById('cumulativeErrorChart').getContext('2d');
     
     // Destroy existing chart if it exists
-    if (window.cumulativeChart) {
+    if (window.cumulativeChart && typeof window.cumulativeChart.destroy === 'function') {
         window.cumulativeChart.destroy();
     }
     
@@ -47,7 +47,7 @@ function plotCumulativeError(errors) {
                 x: {
                     title: {
                         display: true,
-                        text: 'Iterations / 100'
+                        text: 'Iterations'
                     }
                 },
                 y: {
@@ -65,7 +65,7 @@ function plotPredictions(predictions) {
     const ctx = document.getElementById('predictionsChart').getContext('2d');
     
     // Destroy existing chart if it exists
-    if (window.predictionsChart) {
+    if (window.predictionsChart && typeof window.predictionsChart.destroy === 'function') {
         window.predictionsChart.destroy();
     }
     
@@ -93,7 +93,7 @@ function plotPredictions(predictions) {
                 x: {
                     title: {
                         display: true,
-                        text: 'Iterations / 100'
+                        text: 'Iterations'
                     }
                 },
                 y: {
@@ -111,7 +111,7 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
     const ctx = document.getElementById('bestFitChart').getContext('2d');
     
     // Destroy existing chart if it exists
-    if (window.bestFitChart) {
+    if (window.bestFitChart && typeof window.bestFitChart.destroy === 'function') {
         window.bestFitChart.destroy();
     }
     
@@ -182,7 +182,7 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
                 x: {
                     title: {
                         display: true,
-                        text: 'Iterations / 100'
+                        text: 'Iterations'
                     }
                 },
                 y: {
