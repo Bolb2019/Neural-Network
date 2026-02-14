@@ -2,6 +2,7 @@ window {
    min-width: 500px;
    min-height: 500px;
 }
+
 body {
    background-color: rgb(95, 128, 139);
    font-family: 'Arial', sans-serif;
@@ -99,15 +100,16 @@ img {
     width: 150px;
     padding: 8px 12px;
     font-size: 14px;
-    background-color: rgb(200, 200, 200);
+    background-color: rgba(240, 240, 240, 0.2);
     color: rgb(29, 55, 69);
     border: 2px solid rgba(240, 154, 154, 0.5);
-    border-radius: 5px;
-    transition: border-color 0.3s;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s, background-color 0.3s;
 }
 
 .control-group input:focus {
     outline: none;
     border-color: rgb(240, 154, 154);
-    background-color: rgb(220, 220, 220);
+    background-color: rgba(240, 240, 240, 0.3);
 }
