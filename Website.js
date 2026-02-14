@@ -159,6 +159,18 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
         data: {
             datasets: [
                 {
+                    label: 'Decision Boundary (0.5) - Above = Yes, Below = No',
+                    data: [{x: minX, y: 0.5}, {x: maxX, y: 0.5}],
+                    borderColor: 'rgb(34, 139, 34)',
+                    backgroundColor: 'transparent',
+                    showLine: true,
+                    borderWidth: 3,
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0,
+                    pointRadius: 0
+                },
+                {
                     label: `Correct Predictions (${correct})`,
                     data: pointsCorrect.map(p => ({x: p.x, y: p.y})),
                     borderColor: 'rgb(54, 162, 235)',
@@ -181,18 +193,6 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
                     borderWidth: 2,
                     fill: false,
                     tension: 0
-                },
-                {
-                    label: 'Decision Boundary (0.5) - Above = Yes, Below = No',
-                    data: [{x: minX, y: 0.5}, {x: maxX, y: 0.5}],
-                    borderColor: 'rgb(34, 139, 34)',
-                    backgroundColor: 'transparent',
-                    showLine: true,
-                    borderWidth: 3,
-                    borderDash: [5, 5],
-                    fill: false,
-                    tension: 0,
-                    pointRadius: 0
                 }
             ]
         },
@@ -201,7 +201,7 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
             plugins: {
                 title: {
                     display: true,
-                    text: 'Prediction Accuracy (Green dashed line at 0.5 is the decision boundary)'
+                    text: 'Prediction Accuracy'
                 },
                 legend: {
                     display: true
