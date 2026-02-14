@@ -3,18 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Website</title>
+        <title>Neural Network Visualization</title>
         <link rel="stylesheet" type="text/css" href="Website.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     </head>
     <body>
         <h1>This page shows how this neural network works</h1>
-        <p>Click the button and the network will show itself get more accurate (most of the time) at correctly deciding whether a vector is similar enough to a pre-decided vector..</p>
+        <p>Click the button and the network will show itself get more accurate (most of the time) at correctly deciding whether a vector is similar enough to a pre-decided vector.</p>
         <button onClick="runNetwork()" id="Network">Run Network</button>
-        <script src="Website.js"></script>
-        <div class="image-container">
-            <img src="Network/cumulative_error.png" alt="Network Visualization">
-            <img src="Network/predicted.png" alt="Prediction Visualization">
-            <img src="Network/prediction_best_fit.png" alt="Accuracy Visualization">
+        <p id="status" style="font-style: italic; color: #666;"></p>
+        
+        <div class="chart-container">
+            <canvas id="cumulativeErrorChart"></canvas>
         </div>
+        <div class="chart-container">
+            <canvas id="predictionsChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="bestFitChart"></canvas>
+        </div>
+
+        <script src="Network/Network.js"></script>
+        <script src="Website.js"></script>
     </body>
 </html>

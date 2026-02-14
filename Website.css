@@ -56,3 +56,14 @@ img {
     height: auto;
     border-radius: 5px;
 }
+
+.chart-container {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: rgba(240, 240, 240, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
