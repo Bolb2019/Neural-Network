@@ -109,7 +109,7 @@ class NeuralNetwork {
     }
 }
 
-function neuralNetwork() {
+function neuralNetwork(learningRate = 0.001, iterations = 100000) {
     const inputVectors = [
         [3, 1.5],
         [2, 1],
@@ -122,9 +122,8 @@ function neuralNetwork() {
     ];
 
     const targets = [0, 1, 0, 1, 0, 1, 1, 0];
-    const learningRate = 0.001;
     const nn = new NeuralNetwork(learningRate);
-    const trainingResults = nn.train(inputVectors, targets, 100000);
+    const trainingResults = nn.train(inputVectors, targets, iterations);
 
     return trainingResults;
 }

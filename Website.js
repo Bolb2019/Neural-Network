@@ -1,10 +1,23 @@
 // Neural Network Training Function with Visualization
 function runNetwork() {
+    const learningRate = parseFloat(document.getElementById('learningRate').value);
+    const iterations = parseInt(document.getElementById('iterations').value);
+    
+    // Validate inputs
+    if (isNaN(learningRate) || learningRate <= 0) {
+        alert('Please enter a valid learning rate greater than 0');
+        return;
+    }
+    if (isNaN(iterations) || iterations <= 0) {
+        alert('Please enter a valid number of iterations greater than 0');
+        return;
+    }
+    
     document.getElementById('status').innerText = 'Training neural network... This may take a few seconds.';
     
     // Run training after a short delay to allow UI update
     setTimeout(() => {
-        const results = neuralNetwork();
+        const results = neuralNetwork(learningRate, iterations);
         
         // Create visualizations
         plotCumulativeError(results.cumulativeErrors);
@@ -137,6 +150,10 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
     
     const bestFitLine = fitX.map(x => slope * x + intercept);
     
+    // Get min and max X values for decision boundary line
+    const minX = Math.min(...fitX);
+    const maxX = Math.max(...fitX);
+    
     window.bestFitChart = new Chart(ctx, {
         type: 'scatter',
         data: {
@@ -164,6 +181,18 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
                     borderWidth: 2,
                     fill: false,
                     tension: 0
+                },
+                {
+                    label: 'Decision Boundary (0.5) - Above = Yes, Below = No',
+                    data: [{x: minX, y: 0.5}, {x: maxX, y: 0.5}],
+                    borderColor: 'rgb(34, 139, 34)',
+                    backgroundColor: 'transparent',
+                    showLine: true,
+                    borderWidth: 3,
+                    borderDash: [5, 5],
+                    fill: false,
+                    tension: 0,
+                    pointRadius: 0
                 }
             ]
         },
@@ -172,7 +201,7 @@ function plotBestFit(fitX, fitY, pointsCorrect, pointsIncorrect, correct, incorr
             plugins: {
                 title: {
                     display: true,
-                    text: 'Prediction Accuracy'
+                    text: 'Prediction Accuracy (Green dashed line at 0.5 is the decision boundary)'
                 },
                 legend: {
                     display: true
